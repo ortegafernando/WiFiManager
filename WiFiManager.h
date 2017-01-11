@@ -82,8 +82,8 @@ class WiFiManager
     boolean       autoConnect(char const *apName, char const *apPassword = NULL); //Deprecated. Do not use.
 
     //if you want to start the config portal
-    boolean       startConfigPortal();
-    boolean       startConfigPortal(char const *apName, char const *apPassword = NULL);
+    boolean       startConfigPortal(boolean persistent = true);
+    boolean       startConfigPortal(char const *apName, char const *apPassword = NULL, boolean persistent = true);
 
     // get the AP name of the config portal, so it can be used in the callback
     String        getConfigPortalSSID();
