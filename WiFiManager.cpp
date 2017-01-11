@@ -182,12 +182,16 @@ boolean WiFiManager::autoConnect(char const *apName, char const *apPassword) {
   return startConfigPortal(apName, apPassword);
 }
 
-boolean  WiFiManager::startConfigPortal() {
+boolean  WiFiManager::startConfigPortal(boolean persistent) {
   String ssid = "ESP" + String(ESP.getChipId());
-  return startConfigPortal(ssid.c_str(),NULL);
+  return startConfigPortal(ssid.c_str(),NULL, persistent);
 }
 
-boolean  WiFiManager::startConfigPortal(char const *apName, char const *apPassword) {
+boolean  WiFiManager::startConfigPortal(char const *apName, char const *apPassword, boolean persistent) {
+  //Persistent
+  if (!persistent) {
+	  WiFi.persistent(persistent);
+  }
   //setup AP
   int connRes = WiFi.waitForConnectResult();
   if (connRes == WL_CONNECTED){
